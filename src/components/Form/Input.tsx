@@ -5,11 +5,12 @@ import { FormControl, FormErrorMessage, FormLabel, Input as ChakraInput, InputPr
 interface InputProps extends ChakraInputProps {
   name: string;
   label?: string;
+  placeHold?: string;
   error?: FieldError;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
-  = ({ name, label, error = null, ...rest }, ref) => {
+  = ({ name, label, placeHold, error = null, ...rest }, ref) => {
     return (
       <FormControl isInvalid={!!error}>
         {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
@@ -24,7 +25,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
             bgColor: "gray.900"
           }}
           size="lg"
-          placeholder="Digite aqui seu Email..."
+          placeholder={placeHold}
           ref={ref}
           {...rest}
         />
