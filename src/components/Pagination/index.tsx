@@ -17,7 +17,7 @@ interface PaginatinoProps {
   }
 
 export function Pagination({ totalCountOfRegisters, currentePage = 1, onPageChange, registersPerPage = 10 }: PaginatinoProps) {
-    const lastPage = Math.floor(totalCountOfRegisters / registersPerPage)
+    const lastPage = Math.ceil(totalCountOfRegisters / registersPerPage)
 
   const previousPages = currentePage > 1
     ? generatePagesArray(currentePage - 1 - siblingsCount, currentePage - 1)
