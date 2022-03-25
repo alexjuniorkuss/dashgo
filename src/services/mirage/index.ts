@@ -33,7 +33,7 @@ export function makeServer(){
         },
         
         seeds(server){ //criar dados assim que servidor for iniciado
-            server.createList('user',50);
+            server.createList('user',12);
         },
 
         routes(){
@@ -48,7 +48,12 @@ export function makeServer(){
                 const pageStart =(Number(page)-1) * Number(per_page);
                 const pageEnd= pageStart + Number(per_page);
 
-                const users = this.serialize(schema.all('user')).users.slice(pageStart,pageEnd)
+                const users = this.serialize(schema.all('user'))
+                .users
+                .sort((a: User, b: User) => (
+                    new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                     ))
+                .slice(pageStart, pageEnd)
 
                 return new Response(
                     200,
